@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boutique — Roboverse</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="roboverse.css">
+</head>
+<body>
+
+<div class="header-top">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6"><i class="fas fa-phone"></i> +216 50 053 840 &nbsp;&nbsp;<i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81e2eeeff5e0e2f5c1f3eee3eef7e4f3f2e4aff5ef">[email&#160;protected]</a></div>
+      <div class="col-md-6 text-end">
+        <a id="monCompte" href="login.html"><i class="fas fa-user"></i> Mon Compte</a>
+        <a id="logoutLink" href="#" onclick="logout()" style="display:none"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+        <a href="#"><i class="fas fa-heart"></i> Favoris</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="header-middle">
+  <div class="container">
+    <div class="row align-items-center g-3">
+      <div class="col-md-6 col-12 order-md-0 order-3">
+        <div class="search-wrap">
+          <input type="text" id="main-search" placeholder="Rechercher Arduino, Raspberry Pi, capteurs..." autocomplete="off">
+          <button><i class="fas fa-search"></i></button>
+          <div class="search-results-dropdown" id="search-dropdown"></div>
+        </div>
+      </div>
+      <div class="col-md-3 col-7 text-end">
+        <button class="cart-widget" onclick="toggleCart()">
+          <i class="fas fa-shopping-cart me-2"></i>
+          <span id="cart-total">0.00 DT</span>
+          <span class="cart-count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="main-nav">
+  <div class="container">
+    <ul>
+      <li class="nav-item"><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+      <li class="nav-item"><a href="boutique.html" class="active"><i class="fas fa-store"></i> Boutique</a></li>
+      <li class="nav-item"><a href="blog.html"><i class="fas fa-rss"></i> Blog</a></li>
+      <li class="nav-item"><a href="about.html"><i class="fas fa-info-circle"></i> À propos</a></li>
+      <li class="nav-item"><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div style="background:linear-gradient(135deg,var(--primary),var(--primary-light));padding:50px 0;text-align:center;color:#fff">
+  <div class="container">
+    <div class="section-label" style="display:inline-block;background:rgba(0,200,255,.15);border-color:rgba(0,200,255,.3);color:var(--accent2)">Catalogue</div>
+    <h1 style="font-family:'Orbitron',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;margin-top:12px">Notre Boutique</h1>
+    <p style="color:rgba(255,255,255,.65);margin-top:8px">200+ produits disponibles — livraison 48h en Tunisie</p>
+  </div>
+</div>
+
+<!-- BOUTIQUE -->
+<section class="products-section" id="products" style="padding-top:50px">
+  <div class="container">
+    <div class="filter-toolbar">
+      <div class="row g-3 align-items-start">
+        <div class="col-md-8">
+          <div class="filter-toolbar-title"><i class="fas fa-filter"></i> Filtrer par catégorie</div>
+          <div class="filter-tags" id="filter-tags">
+            <span class="filter-tag active" onclick="filterByTag(this,'')">Tous</span>
+            <span class="filter-tag" onclick="filterByTag(this,'Cartes')">Cartes</span>
+            <span class="filter-tag" onclick="filterByTag(this,'Capteurs')">Capteurs</span>
+            <span class="filter-tag" onclick="filterByTag(this,'Moteurs')">Moteurs</span>
+            <span class="filter-tag" onclick="filterByTag(this,'Modules')">Modules</span>
+            <span class="filter-tag" onclick="filterByTag(this,'Kits')">Kits</span>
+            <span class="filter-tag" onclick="filterByTag(this,'Composants')">Composants</span>
+            <span class="filter-tag" onclick="filterByTag(this,'Outils')">Outils</span>
+          </div>
+          <div>
+            <div class="filter-toolbar-title" style="margin-bottom:8px"><i class="fas fa-tag"></i> Prix max : <span id="price-label" style="color:var(--accent3);font-weight:700">200 DT</span></div>
+            <input type="range" id="price-slider" min="0" max="200" value="200" step="5" oninput="onPriceChange(this.value)">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="filter-toolbar-title"><i class="fas fa-sort"></i> Trier par</div>
+          <select class="sort-select" id="sort-select" onchange="renderProducts()">
+            <option value="default">Par défaut</option>
+            <option value="price-asc">Prix croissant</option>
+            <option value="price-desc">Prix décroissant</option>
+            <option value="name-asc">Nom A → Z</option>
+            <option value="new">Nouveautés d'abord</option>
+          </select>
+          <div class="results-info" id="results-info">Affichage de <strong>12</strong> produits</div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="products-container"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-2"><h5>Navigation</h5><ul><li><a href="index.html">Accueil</a></li><li><a href="boutique.html">Boutique</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">À propos</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="col-md-3"><h5>Catégories</h5><ul><li><a href="boutique.html?cat=Cartes">Cartes</a></li><li><a href="boutique.html?cat=Capteurs">Capteurs</a></li><li><a href="boutique.html?cat=Kits">Kits</a></li><li><a href="boutique.html?cat=Outils">Outils</a></li></ul></div>
+      <div class="col-md-3"><h5>Contact</h5><ul><li><i class="fas fa-phone me-2" style="color:var(--accent2)"></i>+216 50 053 840</li><li><i class="fas fa-envelope me-2" style="color:var(--accent2)"></i><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bcdfd3d2c8dddfc8fcced3ded3cad9cecfd992c8d2">[email&#160;protected]</a></li></ul></div>
+    </div>
+    <hr class="footer-divider">
+    <p class="copyright">© 2026 Roboverse. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<!-- CART & ORDER MODALS (same as index) -->
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart-modal" id="cart-modal">
+  <div class="cart-header"><h4><i class="fas fa-shopping-cart me-2"></i>Mon Panier</h4><button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button></div>
+  <div class="cart-items" id="cart-items"><div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Votre panier est vide</p></div></div>
+  <div class="cart-footer">
+    <div class="cart-total-row"><span class="cart-total-label">Total</span><span class="cart-total-amount" id="cart-total-footer">0.00 DT</span></div>
+    <button class="btn-checkout" onclick="checkout()"><i class="fas fa-check me-2"></i>Commander maintenant</button>
+  </div>
+</div>
+
+<div class="order-modal-overlay" id="order-modal-overlay">
+  <div class="order-modal">
+    <div class="order-modal-header"><h4><i class="fas fa-shopping-bag me-2"></i>Passer une commande</h4><button class="order-modal-close" onclick="closeOrderModal()"><i class="fas fa-times"></i></button></div>
+    <div class="order-steps">
+      <div class="order-step active" id="step-indicator-1"><div class="step-num">1</div><span class="step-label">Coordonnées</span></div>
+      <div class="order-step" id="step-indicator-2"><div class="step-num">2</div><span class="step-label">Livraison</span></div>
+      <div class="order-step" id="step-indicator-3"><div class="step-num">3</div><span class="step-label">Paiement</span></div>
+      <div class="order-step" id="step-indicator-4"><div class="step-num">4</div><span class="step-label">Confirmation</span></div>
+    </div>
+    <div class="order-step-panel active" id="panel-1">
+      <h5><i class="fas fa-user me-2" style="color:var(--accent)"></i>Vos coordonnées</h5>
+      <div class="order-row"><div class="order-form-group"><label>Prénom *</label><input type="text" id="order-prenom" placeholder="Prénom"></div><div class="order-form-group"><label>Nom *</label><input type="text" id="order-nom" placeholder="Nom"></div></div>
+      <div class="order-form-group"><label>Email *</label><input type="email" id="order-email" placeholder="roboverse@shebuilds.com"></div>
+      <div class="order-form-group"><label>Téléphone *</label><input type="tel" id="order-tel" placeholder="+216 50 053 840"></div>
+    </div>
+    <div class="order-step-panel" id="panel-2">
+      <h5><i class="fas fa-truck me-2" style="color:var(--accent)"></i>Adresse de livraison</h5>
+      <div class="order-form-group"><label>Adresse *</label><input type="text" id="order-adresse" placeholder="Rue, N°..."></div>
+      <div class="order-row"><div class="order-form-group"><label>Ville *</label><select id="order-ville"><option value="">Choisir une ville</option><option>Tunis</option><option>Sfax</option><option>Sousse</option><option>Ariana</option><option>Autre</option></select></div><div class="order-form-group"><label>Code postal</label><input type="text" id="order-cp" placeholder="1000"></div></div>
+      <div class="order-form-group"><label>Note</label><textarea id="order-note" rows="2" placeholder="Instructions spéciales..."></textarea></div>
+      <div class="shipping-info-box"><i class="fas fa-shipping-fast"></i><div><strong>Livraison : 7.00 DT</strong> — Gratuite à partir de 200 DT</div></div>
+    </div>
+    <div class="order-step-panel" id="panel-3">
+      <h5><i class="fas fa-credit-card me-2" style="color:var(--accent)"></i>Mode de paiement</h5>
+      <label class="payment-option selected" onclick="selectPayment(this)"><input type="radio" name="payment" value="cod" checked><span>💵</span><div><div class="payment-option-label">Paiement à la livraison</div><div class="payment-option-desc">Payez en espèces à la réception</div></div></label>
+      <label class="payment-option" onclick="selectPayment(this)"><input type="radio" name="payment" value="virement"><span>🏦</span><div><div class="payment-option-label">Virement bancaire</div><div class="payment-option-desc">Transfert sur notre compte</div></div></label>
+      <label class="payment-option" onclick="selectPayment(this)"><input type="radio" name="payment" value="carte"><span>💳</span><div><div class="payment-option-label">Carte bancaire</div><div class="payment-option-desc">Visa / Mastercard sécurisé</div></div></label>
+    </div>
+    <div class="order-step-panel" id="panel-4">
+      <h5><i class="fas fa-clipboard-list me-2" style="color:var(--accent)"></i>Récapitulatif</h5>
+      <div class="order-info-block" id="recap-client"></div>
+      <div class="order-info-block" id="recap-livraison"></div>
+      <div class="order-info-block" id="recap-paiement"></div>
+      <div id="recap-items"></div><div id="recap-totals"></div>
+    </div>
+    <div class="order-step-panel" id="panel-success">
+      <div class="order-success"><i class="fas fa-check-circle success-icon"></i><h3>Commande confirmée !</h3><p>Merci pour votre commande.</p><p class="order-number" id="order-number-display"></p><button class="btn-close-success" onclick="closeOrderModal()"><i class="fas fa-home me-2"></i>Retour</button></div>
+    </div>
+    <div class="order-modal-nav" id="order-nav">
+      <button class="btn-order-back" id="btn-back" onclick="orderPrev()" style="visibility:hidden"><i class="fas fa-arrow-left me-2"></i>Retour</button>
+      <button class="btn-order-next" id="btn-next" onclick="orderNext()">Suivant <i class="fas fa-arrow-right ms-2"></i></button>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="roboverse.js"></script>
+<script>
+
+
+  
+let currentFilter = '';
+let currentSearch = '';
+let currentMaxPrice = 200;
+
+  renderProducts();
+
+function filterByTag(el, cat){
+  document.querySelectorAll('#filter-tags .filter-tag').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  currentFilter = cat;
+  renderProducts();
+}
+
+function filterByCategory(cat){
+  currentFilter = cat;
+  document.querySelectorAll('#filter-tags .filter-tag').forEach(t=>{
+    t.classList.toggle('active', t.textContent.trim().toLowerCase() === (cat||'tous').toLowerCase());
+  });
+  renderProducts();
+}
+
+function onPriceChange(val){
+  currentMaxPrice = parseInt(val);
+  document.getElementById('price-label').textContent = val + ' DT';
+  renderProducts();
+}
+
+function renderProducts(){
+  const container = document.getElementById('products-container');
+  const productsList = JSON.parse(localStorage.getItem("products") || "[]");
+  let filtered = productsList.filter(p=>{
+    const mc = !currentFilter || p.categorie === currentFilter;
+    const mp = p.prix <= currentMaxPrice;
+    const ms = !currentSearch || p.nom.toLowerCase().includes(currentSearch) || p.categorie.toLowerCase().includes(currentSearch);
+    return mc && mp && ms;
+  });
+  const sort = document.getElementById('sort-select').value;
+  if(sort==='price-asc') filtered.sort((a,b)=>a.prix-b.prix);
+  else if(sort==='price-desc') filtered.sort((a,b)=>b.prix-a.prix);
+  else if(sort==='name-asc') filtered.sort((a,b)=>a.nom.localeCompare(b.nom));
+  else if(sort==='new') filtered.sort((a,b)=>(b.badge==='new'?1:0)-(a.badge==='new'?1:0));
+  document.getElementById('results-info').innerHTML = `Affichage de <strong>${filtered.length}</strong> produit${filtered.length>1?'s':''}`;
+  if(!filtered.length){ container.innerHTML=`<div class="no-results"><i class="fas fa-search-minus"></i><p>Aucun produit ne correspond à vos critères.</p><button class="filter-tag active mt-3" onclick="resetFilters()">Réinitialiser</button></div>`; return; }
+  container.innerHTML = filtered.map(p=>`
+    <div class="col-sm-6 col-lg-3">
+      <div class="product-card">
+        <div class="product-image">
+          <img src="${p.image}" class="product-image">
+          ${p.badge?`<span class="product-badge ${p.badge}">${p.badge==='new'?'NOUVEAU':'HOT'}</span>`:''}
+          <div class="product-overlay">
+            <button class="overlay-btn" onclick="addToCart(${p.id})" title="Ajouter"><i class="fas fa-cart-plus"></i></button>
+            <button class="overlay-btn" title="Favoris"><i class="fas fa-heart"></i></button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category-tag">${p.categorie}</div>
+          <div class="product-name">${p.nom}</div>
+          <div class="product-desc">${p.description}</div>
+          <div class="stock-indicator"><i class="fas fa-circle" style="font-size:8px"></i> En stock (${p.stock})</div>
+          <div class="product-price">${p.prix} <small>DT</small></div>
+          <button class="btn-add-cart" onclick="addToCart(${p.id})"><i class="fas fa-cart-plus"></i> Ajouter au panier</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function resetFilters(){
+  currentFilter=''; currentSearch=''; currentMaxPrice=200;
+  document.getElementById('price-slider').value=200;
+  document.getElementById('price-label').textContent='200 DT';
+  document.getElementById('main-search').value='';
+  document.getElementById('sort-select').value='default';
+  document.querySelectorAll('#filter-tags .filter-tag').forEach((t,i)=>t.classList.toggle('active',i===0));
+  renderProducts();
+}
+
+
+/*// Override search to also filter products
+document.addEventListener('DOMContentLoaded', function(){
+  renderProducts();
+  // Check URL param for category
+  const params = new URLSearchParams(window.location.search);
+  const cat = params.get('cat');
+  if(cat){
+    currentFilter = cat;
+    document.querySelectorAll('#filter-tags .filter-tag').forEach(t=>{
+      t.classList.toggle*/
+</script>
+</body>
+</html>

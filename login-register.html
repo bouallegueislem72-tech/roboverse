@@ -1,0 +1,951 @@
+<!doctype html>
+<html class="no-js" lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Connexion / Inscription - Roboverse</title>
+     <link rel="shortcut icon" type="image/x-icon" href="images/islemm.png">
+    <meta name="description" content="Connectez-vous ou créez un compte Roboverse">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <!-- Favicon -->
+   
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: rgb(20, 4, 74);
+            --secondary-color: #FF9800;
+            --success-color: #4CAF50;
+            --danger-color: #F44336;
+            --dark-color: #212529;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #dfdfdde2 0%, rgb(216, 213, 213) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 40px 0;
+        }
+        
+        /* ==================== HEADER SIMPLE ==================== */
+        .simple-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 0px 0;
+            z-index: 1000;
+        }
+        .logo h1 {
+    text-shadow: 0 0 10px #00e5ff;
+}
+        .logo h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .back-home {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .back-home:hover {
+            color: var(--primary-color);
+        }
+        
+        /* ==================== AUTH CONTAINER ==================== */
+        .auth-container {
+            margin-top: 80px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+       
+        }
+       
+        
+        .auth-tabs {
+            display: flex;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            background: #f8f9fa;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+            color: #666;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .auth-tab.active {
+            background: white;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .auth-tab:hover {
+            color: var(--primary-color);
+        }
+        
+        .auth-content {
+            padding: 40px;
+        }
+        
+        .tab-pane {
+            display: none;
+        }
+        
+        .tab-pane.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ==================== FORMS ==================== */
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .form-label i {
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+        
+        .form-control {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 12px 15px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25);
+        }
+        
+        .input-group {
+            position: relative;
+        }
+        
+        .input-group .form-control {
+            padding-right: 45px;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+        
+        .password-toggle:hover {
+            color: var(--primary-color);
+        }
+        
+        .form-check-input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .form-check-label {
+            cursor: pointer;
+            margin-left: 8px;
+        }
+        
+        /* ==================== BUTTONS ==================== */
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1976D2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+        }
+        
+        .btn-social {
+            border: 2px solid #e0e0e0;
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            width: 100%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-social:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-social.facebook {
+            color: #1877F2;
+        }
+        
+        .btn-social.google {
+            color: #DB4437;
+        }
+        
+        /* ==================== DIVIDER ==================== */
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .divider::before {
+            left: 0;
+        }
+        
+        .divider::after {
+            right: 0;
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 15px;
+            color: #999;
+            font-weight: 500;
+        }
+        
+        /* ==================== LINKS ==================== */
+        .form-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .form-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .form-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* ==================== ALERTS ==================== */
+        .alert {
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: none;
+        }
+        
+        .alert-success {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+        
+        .alert-danger {
+            background: #FFEBEE;
+            color: #C62828;
+        }
+        
+        /* ==================== BENEFITS ==================== */
+        .benefits-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1976D2 100%);
+            padding: 40px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: start;
+            margin-bottom: 30px;
+        }
+        
+        .benefit-icon {
+            font-size: 32px;
+            margin-right: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .benefit-content h4 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .benefit-content p {
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .auth-content {
+                padding: 25px;
+            }
+            
+            .benefits-section {
+                padding: 30px 25px;
+            }
+            
+            .auth-tab {
+                font-size: 16px;
+                padding: 15px;
+            }
+        }
+        
+        /* ==================== VALIDATION ==================== */
+        .form-control.is-invalid {
+            border-color: var(--danger-color);
+        }
+        
+        .form-control.is-valid {
+            border-color: var(--success-color);
+        }
+        
+        .invalid-feedback,
+        .valid-feedback {
+            display: none;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .form-control.is-invalid ~ .invalid-feedback {
+            display: block;
+            color: var(--danger-color);
+        }
+        
+        .form-control.is-valid ~ .valid-feedback {
+            display: block;
+            color: var(--success-color);
+        }
+        
+        .password-strength {
+            height: 5px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s;
+        }
+        
+        .password-strength-bar.weak {
+            width: 33%;
+            background: var(--danger-color);
+        }
+        
+        .password-strength-bar.medium {
+            width: 66%;
+            background: var(--secondary-color);
+        }
+        
+        .password-strength-bar.strong {
+            width: 100%;
+            background: var(--success-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ==================== SIMPLE HEADER ==================== -->
+    <div class="simple-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <div class="logo">
+                        <a href="index.html">
+        <img src="images/nour.png" alt="Roboverse Logo" style="height: 70px;">
+    </a>
+                    </div>
+                </div>
+                <div class="col-6 text-end">
+                    <a href="index.html" class="back-home">
+                        <i class="fas fa-arrow-left me-2"></i>Retour à l'accueil
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== AUTH CONTAINER ==================== -->
+    <div class="container auth-container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="auth-card">
+                    <!-- Tabs -->
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" onclick="switchTab('login')">
+                            <i class="fas fa-sign-in-alt me-2"></i>Connexion
+                        </button>
+                        <button class="auth-tab" onclick="switchTab('register')">
+                            <i class="fas fa-user-plus me-2"></i>Inscription
+                        </button>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="auth-content">
+                        <!-- ==================== LOGIN TAB ==================== -->
+                        <div class="tab-pane active" id="login-tab">
+                            <h3 class="mb-4">Bon retour ! </h3>
+                            
+                            <form id="loginForm" onsubmit="handleLogin(event)">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-envelope"></i>Adresse Email
+                                    </label>
+                                    <input type="email" class="form-control" id="login-email" placeholder="exemple@email.com" required>
+                                    <div class="invalid-feedback">Veuillez entrer une adresse email valide</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-lock"></i>Mot de passe
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="login-password" placeholder="••••••••" required>
+                                        <span class="password-toggle" onclick="togglePassword('login-password')">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                    <div class="invalid-feedback">Le mot de passe est requis</div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="remember-me">
+                                        <label class="form-check-label" for="remember-me">
+                                            Se souvenir de moi
+                                        </label>
+                                    </div>
+                                    <a href="#" class="text-decoration-none">Mot de passe oublié ?</a>
+                                </div>
+
+                                <button type="submit" class="btn-primary-custom">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                                </button>
+                            </form>
+
+                            <div class="divider">
+                                <span>OU</span>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <button class="btn-social facebook" onclick="socialLogin('facebook')">
+                                        <i class="fab fa-facebook-f"></i>
+                                        Facebook
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn-social google" onclick="socialLogin('google')">
+                                        <i class="fab fa-google"></i>
+                                        Google
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-links">
+                                <p class="mb-0">Pas encore de compte ? <a href="#" onclick="switchTab('register'); return false;">Créer un compte</a></p>
+                            </div>
+                        </div>
+
+                        <!-- ==================== REGISTER TAB ==================== -->
+                        <div class="tab-pane" id="register-tab">
+                            <h3 class="mb-4">Créer un compte </h3>
+                            
+                            <form id="registerForm" onsubmit="handleRegister(event)">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">
+                                                <i class="fas fa-user"></i>Prénom
+                                            </label>
+                                            <input type="text" class="form-control" id="register-firstname" placeholder="Votre prénom" required>
+                                            <div class="invalid-feedback">Le prénom est requis</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">
+                                                <i class="fas fa-user"></i>Nom
+                                            </label>
+                                            <input type="text" class="form-control" id="register-lastname" placeholder="Votre nom" required>
+                                            <div class="invalid-feedback">Le nom est requis</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-envelope"></i>Adresse Email
+                                    </label>
+                                    <input type="email" class="form-control" id="register-email" placeholder="exemple@email.com" required>
+                                    <div class="invalid-feedback">Veuillez entrer une adresse email valide</div>
+                                    <div class="valid-feedback">Email disponible</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-phone"></i>Téléphone
+                                    </label>
+                                    <input type="tel" class="form-control" id="register-phone" placeholder="+216 XX XXX XXX" required>
+                                    <div class="invalid-feedback">Veuillez entrer un numéro de téléphone valide</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-lock"></i>Mot de passe
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="register-password" placeholder="••••••••" required onkeyup="checkPasswordStrength(this.value)">
+                                        <span class="password-toggle" onclick="togglePassword('register-password')">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                    <div class="password-strength">
+                                        <div class="password-strength-bar" id="password-strength-bar"></div>
+                                    </div>
+                                    <small class="text-muted">Au moins 8 caractères avec majuscules, minuscules et chiffres</small>
+                                    <div class="invalid-feedback">Le mot de passe doit contenir au moins 8 caractères</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-lock"></i>Confirmer le mot de passe
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="register-password-confirm" placeholder="••••••••" required>
+                                        <span class="password-toggle" onclick="togglePassword('register-password-confirm')">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                    <div class="invalid-feedback">Les mots de passe ne correspondent pas</div>
+                                </div>
+
+                                <div class="form-check mb-4">
+                                    <input class="form-check-input" type="checkbox" id="accept-terms" required>
+                                    <label class="form-check-label" for="accept-terms">
+                                        J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a>
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn-primary-custom">
+                                    <i class="fas fa-user-plus me-2"></i>Créer mon compte
+                                </button>
+                            </form>
+
+                            <div class="divider">
+                                <span>OU</span>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <button class="btn-social facebook" onclick="socialLogin('facebook')">
+                                        <i class="fab fa-facebook-f"></i>
+                                        Facebook
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn-social google" onclick="socialLogin('google')">
+                                        <i class="fab fa-google"></i>
+                                        Google
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-links">
+                                <p class="mb-0">Déjà un compte ? <a href="#" onclick="switchTab('login'); return false;">Se connecter</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== BENEFITS SECTION ==================== -->
+            <div class="col-lg-5 d-none d-lg-block">
+                <div class="benefits-section" style="border-radius: 20px; height: 100%;">
+                    <h3 class="mb-4">Pourquoi rejoindre Roboverse ?</h3>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Livraison Rapide</h4>
+                            <p>Recevez vos commandes en 48h partout en Tunisie</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-percent"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Offres Exclusives</h4>
+                            <p>Profitez de réductions réservées aux membres</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Suivi de Commandes</h4>
+                            <p>Suivez vos commandes en temps réel</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Liste de Souhaits</h4>
+                            <p>Sauvegardez vos produits préférés</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Support Premium</h4>
+                            <p>Assistance technique prioritaire 24/7</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // ==================== TAB SWITCHING ====================
+        function switchTab(tab) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+            
+            // Add active class to selected tab
+            if (tab === 'login') {
+                document.querySelectorAll('.auth-tab')[0].classList.add('active');
+                document.getElementById('login-tab').classList.add('active');
+            } else {
+                document.querySelectorAll('.auth-tab')[1].classList.add('active');
+                document.getElementById('register-tab').classList.add('active');
+            }
+        }
+
+        // ==================== PASSWORD TOGGLE ====================
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const icon = field.nextElementSibling.querySelector('i');
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                field.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // ==================== PASSWORD STRENGTH ====================
+        function checkPasswordStrength(password) {
+            const strengthBar = document.getElementById('password-strength-bar');
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]+/)) strength++;
+            if (password.match(/[A-Z]+/)) strength++;
+            if (password.match(/[0-9]+/)) strength++;
+            if (password.match(/[$@#&!]+/)) strength++;
+            
+            strengthBar.className = 'password-strength-bar';
+            
+            if (strength <= 2) {
+                strengthBar.classList.add('weak');
+            } else if (strength <= 4) {
+                strengthBar.classList.add('medium');
+            } else {
+                strengthBar.classList.add('strong');
+            }
+        }
+
+        // ==================== LOGIN FORM ====================
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const rememberMe = document.getElementById('remember-me').checked;
+            
+            // Validation
+            let valid = true;
+            
+            if (!validateEmail(email)) {
+                document.getElementById('login-email').classList.add('is-invalid');
+                valid = false;
+            } else {
+                document.getElementById('login-email').classList.remove('is-invalid');
+            }
+            
+            if (password.length < 6) {
+                document.getElementById('login-password').classList.add('is-invalid');
+                valid = false;
+            } else {
+                document.getElementById('login-password').classList.remove('is-invalid');
+            }
+            
+            if (!valid) return;
+            
+            // Simuler la connexion
+            console.log('Login:', { email, password, rememberMe });
+            
+            showNotification('Connexion réussie! Redirection...', 'success');
+            
+            // Sauvegarder l'utilisateur
+            const user = {
+                email: email,
+                name: email.split('@')[0],
+                loggedIn: true
+            };
+            localStorage.setItem('roboverse_user', JSON.stringify(user));
+            
+            // Redirection après 2 secondes
+            setTimeout(() => {
+               window.location.href = 'index.html';
+            }, 2000);
+        }
+
+        // ==================== REGISTER FORM ====================
+        function handleRegister(event) {
+            event.preventDefault();
+            
+            const firstname = document.getElementById('register-firstname').value;
+            const lastname = document.getElementById('register-lastname').value;
+            const email = document.getElementById('register-email').value;
+            const phone = document.getElementById('register-phone').value;
+            const password = document.getElementById('register-password').value;
+            const passwordConfirm = document.getElementById('register-password-confirm').value;
+            const acceptTerms = document.getElementById('accept-terms').checked;
+            
+            // Validation
+            let valid = true;
+            
+            if (firstname.length < 2) {
+                document.getElementById('register-firstname').classList.add('is-invalid');
+                valid = false;
+            } else {
+                document.getElementById('register-firstname').classList.remove('is-invalid');
+            }
+            
+            if (lastname.length < 2) {
+                document.getElementById('register-lastname').classList.add('is-invalid');
+                valid = false;
+            } else {
+                document.getElementById('register-lastname').classList.remove('is-invalid');
+            }
+            
+            if (!validateEmail(email)) {
+                document.getElementById('register-email').classList.add('is-invalid');
+                valid = false;
+            } else {
+                document.getElementById('register-email').classList.remove('is-invalid');
+                document.getElementById('register-email').classList.add('is-valid');
+            }
+            
+            if (phone.length < 8) {
+                document.getElementById('register-phone').classList.add('is-invalid');
+                valid = false;
+            } else {
+                document.getElementById('register-phone').classList.remove('is-invalid');
+            }
+            
+            if (password.length < 8 || !password.match(/[A-Z]/) || !password.match(/[0-9]/)) {
+                document.getElementById('register-password').classList.add('is-invalid');
+                valid = false;
+            } else {
+                document.getElementById('register-password').classList.remove('is-invalid');
+            }
+            
+            if (password !== passwordConfirm) {
+                document.getElementById('register-password-confirm').classList.add('is-invalid');
+                valid = false;
+            } else {
+                document.getElementById('register-password-confirm').classList.remove('is-invalid');
+            }
+            
+            if (!acceptTerms) {
+                showNotification('Veuillez accepter les conditions d\'utilisation', 'danger');
+                valid = false;
+            }
+            
+            if (!valid) return;
+            
+            // Simuler l'inscription
+            console.log('Register:', { firstname, lastname, email, phone, password });
+            
+            showNotification('Compte créé avec succès! Redirection...', 'success');
+            
+            // Sauvegarder l'utilisateur
+            const user = {
+                email: email,
+                name: `${firstname} ${lastname}`,
+                phone: phone,
+                loggedIn: true
+            };
+            localStorage.setItem('roboverse_user', JSON.stringify(user));
+            
+            // Redirection après 2 secondes
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+
+        // ==================== SOCIAL LOGIN ====================
+        function socialLogin(provider) {
+            showNotification(`Connexion avec ${provider} en cours...`, 'info');
+            // Ici, vous intégreriez l'authentification OAuth réelle
+            console.log('Social login:', provider);
+        }
+
+        // ==================== VALIDATION ====================
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // ==================== NOTIFICATIONS ====================
+        function showNotification(message, type = 'success') {
+            const bgColor = {
+                'success': '#4CAF50',
+                'danger': '#F44336',
+                'info': '#2196F3'
+            };
+            
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${bgColor[type]};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 99999;
+                animation: slideIn 0.3s;
+            `;
+            
+            const icon = {
+                'success': 'fa-check-circle',
+                'danger': 'fa-exclamation-circle',
+                'info': 'fa-info-circle'
+            };
+            
+            notification.innerHTML = `<i class="fas ${icon[type]} me-2"></i>${message}`;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is already logged in
+            const user = localStorage.getItem('roboverse_user');
+            if (user) {
+                const userData = JSON.parse(user);
+                if (userData.loggedIn) {
+                    showNotification('Vous êtes déjà connecté!', 'info');
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

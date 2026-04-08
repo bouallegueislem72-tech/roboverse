@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="shortcut icon" type="image/x-icon" href="images/islemm.png">
+<title>Contact — Roboverse</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="roboverse.css">
+</head>
+<body>
+
+<div class="header-top">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6"><i class="fas fa-phone"></i> +216 50 053 840</div>
+      <div class="col-md-6 text-end">
+        <a id="monCompte" href="login.html"><i class="fas fa-user"></i> Mon Compte</a>
+        <a id="logoutLink" href="#" onclick="logout()" style="display:none"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="header-middle">
+  <div class="container">
+    <div class="row align-items-center g-3">
+      <div class="col-md-6 col-12 order-md-0 order-3">
+        <div class="search-wrap">
+          <input type="text" id="main-search" placeholder="Rechercher..." autocomplete="off">
+          <button><i class="fas fa-search"></i></button>
+          <div class="search-results-dropdown" id="search-dropdown"></div>
+        </div>
+      </div>
+      <div class="col-md-3 col-7 text-end">
+        <button class="cart-widget" onclick="toggleCart()">
+          <i class="fas fa-shopping-cart me-2"></i>
+          <span id="cart-total">0.00 DT</span>
+          <span class="cart-count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="main-nav">
+  <div class="container">
+    <ul>
+      <li class="nav-item"><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+      <li class="nav-item"><a href="boutique.html"><i class="fas fa-store"></i> Boutique</a></li>
+      <li class="nav-item"><a href="blog.html"><i class="fas fa-rss"></i> Blog</a></li>
+      <li class="nav-item"><a href="about.html"><i class="fas fa-info-circle"></i> À propos</a></li>
+      <li class="nav-item"><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div style="background:linear-gradient(135deg,var(--primary),var(--primary-light));padding:50px 0;text-align:center;color:#fff">
+  <div class="container">
+    <div class="section-label" style="display:inline-block;background:rgba(0,200,255,.15);border-color:rgba(0,200,255,.3);color:var(--accent2)">Contact</div>
+    <h1 style="font-family:'Orbitron',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;margin-top:12px">Contactez-nous</h1>
+    <p style="color:rgba(255,255,255,.65);margin-top:8px">Une question ? Notre équipe est là pour vous aider.</p>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="contact-info-card">
+          <h3>Parlons de votre projet !</h3>
+          <p>Notre équipe technique est disponible pour vous aider à choisir les bons composants et réaliser vos projets robotiques.</p>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div><div class="contact-info-label">Adresse</div><div class="contact-info-val">Lafayette, Tunis 1003, Tunisie</div></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="fas fa-phone"></i></div>
+            <div><div class="contact-info-label">Téléphone</div><div class="contact-info-val">+216 50 053 840</div></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+            <div><div class="contact-info-label">Email</div><div class="contact-info-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="87e4e8e9f3e6e4f3c7f5e8e5e8f1e2f5f4e2a9f3e9">[email&#160;protected]</a></div></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="fas fa-clock"></i></div>
+            <div><div class="contact-info-label">Horaires</div><div class="contact-info-val">Lun – Sam : 9h00 – 18h00</div></div>
+          </div>
+          <div class="contact-social">
+            <a href="#" class="contact-social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="contact-social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="contact-social-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="contact-social-link"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="contact-form-card">
+          <h3>Envoyer un message</h3>
+          <div class="form-row">
+            <div class="form-group"><label>Prénom *</label><input type="text" id="c-prenom" placeholder="Votre prénom"></div>
+            <div class="form-group"><label>Nom *</label><input type="text" id="c-nom" placeholder="Votre nom"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Email *</label><input type="email" id="c-email" placeholder="votre@email.com"></div>
+            <div class="form-group"><label>Téléphone</label><input type="tel" id="c-tel" placeholder="+216 XX XXX XXX"></div>
+          </div>
+          <div class="form-group">
+            <label>Sujet *</label>
+            <select id="c-sujet">
+              <option value="">Choisir un sujet</option>
+              <option>Question technique sur un produit</option>
+              <option>Suivi de commande</option>
+              <option>Demande de devis (projet)</option>
+              <option>Partenariat / Revendeur</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message *</label>
+            <textarea id="c-message" rows="5" placeholder="Décrivez votre question ou votre projet en détail..."></textarea>
+          </div>
+          <button class="btn-contact-submit" onclick="submitContactForm()">
+            <i class="fas fa-paper-plane"></i> Envoyer le message
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <div class="container">
+    <div class="map-placeholder">
+      <div class="map-pin-card">
+        <i class="fas fa-map-marker-alt"></i>
+        <p>Roboverse — Tunis, Tunisie</p>
+        <span>Lafayette, 1003 Tunis</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="section-title">
+      <div class="section-label">FAQ</div>
+      <h2>Questions Fréquentes</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">Quels sont vos délais de livraison ? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Nous livrons partout en Tunisie sous 48h ouvrables. Pour Tunis et ses banlieues, la livraison peut se faire le jour même si la commande est passée avant 12h.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">Comment obtenir de l'aide technique sur un produit ? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Notre équipe technique est disponible par email et téléphone du lundi au samedi. Vous pouvez aussi nous envoyer un message via le formulaire de contact ci-dessus.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">Proposez-vous des devis pour les projets scolaires ou entreprises ? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Oui ! Nous avons des tarifs spéciaux pour les établissements scolaires, universités et entreprises. Contactez-nous avec les détails de votre projet pour recevoir un devis personnalisé.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">Quels modes de paiement acceptez-vous ? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Nous acceptons le paiement à la livraison (espèces), le virement bancaire, et la carte bancaire (Visa / Mastercard). Paiement 100% sécurisé.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">Puis-je retourner un produit ? <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">Oui, nous acceptons les retours sous 14 jours après réception, pour tout produit défectueux ou non conforme à la description. Le retour est gratuit.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-2"><h5>Navigation</h5><ul><li><a href="index.html">Accueil</a></li><li><a href="boutique.html">Boutique</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">À propos</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="col-md-3"><h5>Catégories</h5><ul><li><a href="boutique.html?cat=Cartes">Cartes</a></li><li><a href="boutique.html?cat=Capteurs">Capteurs</a></li><li><a href="boutique.html?cat=Kits">Kits</a></li></ul></div>
+      <div class="col-md-3"><h5>Contact</h5><ul><li><i class="fas fa-phone me-2" style="color:var(--accent2)"></i>+216 50 053 840</li><li><i class="fas fa-envelope me-2" style="color:var(--accent2)"></i><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e685898892878592a6948984899083949583c89288">[email&#160;protected]</a></li></ul></div>
+    </div>
+    <hr class="footer-divider">
+    <p class="copyright">© 2026 Roboverse. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart-modal" id="cart-modal">
+  <div class="cart-header"><h4><i class="fas fa-shopping-cart me-2"></i>Mon Panier</h4><button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button></div>
+  <div class="cart-items" id="cart-items"><div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Votre panier est vide</p></div></div>
+  <div class="cart-footer">
+    <div class="cart-total-row"><span class="cart-total-label">Total</span><span class="cart-total-amount" id="cart-total-footer">0.00 DT</span></div>
+   
+    <button class="btn-checkout" onclick="alert('Allez sur la boutique')">
+  Aller à la boutique
+</button>
+
+
+
+
+
+
+</div>
+</div>
+  <script>
+function toggleCart() {
+  document.getElementById("cart-modal").classList.toggle("active");
+  document.getElementById("cart-overlay").classList.toggle("active");
+}
+
+function logout() {
+  localStorage.removeItem('roboverse_user');
+  window.location.href = "login.html";
+}
+
+function submitContactForm() {
+  alert("Message envoyé !");
+}
+
+function toggleFaq(element) {
+  element.classList.toggle("active");
+}
+</script>
+</body>
+</html>
